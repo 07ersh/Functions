@@ -6,22 +6,23 @@ const int arSize = 5;
 int fill_array(double ar[], int limit);
 void show_array(const double ar[], int n);
 void revalue_array(double r, double ar[], int n);
-double sum_array(const double ar[], int n);
+double sum_array(const double* begin, const double* end);
 
 
 int main()
 {
 	using namespace std;
-	double myArray[arSize];
+	double *myArray =new double[arSize];
 	for(int i=0; i<arSize; i++)
 	{
 		myArray[i] = -1;
 	}
+	
 	int size = fill_array(myArray, arSize);
 	if(size > 0)
 	{
 		show_array(myArray, arSize);
-		cout << "Sum of array's element = " << sum_array(myArray, arSize) << endl;
+		cout << "Sum of array's element = " << sum_array(myArray, myArray+arSize) << endl;
 		cout << "Enter revalution factor: ";
 		double factor;
 		while(!(cin>>factor))
@@ -33,7 +34,7 @@ int main()
 		}
 		revalue_array(factor, myArray, arSize);
 		show_array(myArray, arSize);
-		cout << "Sum of array's element = " << sum_array(myArray, arSize) << endl;
+		cout << "Sum of array's element = " << sum_array(myArray, myArray + arSize) << endl;
 	}
 	system("pause");
     return 0;
@@ -75,15 +76,13 @@ void show_array(const double ar[], int n)
 	std::cout << std::endl;
 }
 
-double sum_array(const double ar[], int n)
+double sum_array(const double* begin, const double* end)
 {
 	double sum = 0;
-	for(int i=0; i<n; i++)
+	
+	for(const double *pt = begin; pt!=end; pt++ )
 	{
-		if(ar[i]>=0)
-		{
-			sum += ar[i];
-		}
+		sum += *pt;
 	}
 	return sum;
 }
