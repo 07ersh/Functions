@@ -36,6 +36,7 @@ int main()
 		show_array(myArray, arSize);
 		cout << "Sum of array's element = " << sum_array(myArray, myArray + arSize) << endl;
 	}
+	delete[] myArray;
 	system("pause");
     return 0;
 }
